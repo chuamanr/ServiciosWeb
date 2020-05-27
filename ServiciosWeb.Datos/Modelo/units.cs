@@ -19,33 +19,15 @@ namespace ServiciosWeb.Datos.Modelo
         public int id { get; set; }
 
         [JsonIgnore]
-
-        [JsonProperty(Order = -2)]
         public string message_id { get; set; }
-
-        [JsonProperty(Order = -2)]
         public string imei { get; set; }
-
-        [JsonProperty(Order = -2)]
         public string serialNumber { get; set; }
-
-        [JsonProperty(Order = -2)]
         public string stock { get; set; }
-
-        [JsonProperty(Order = -2)]
         public string model { get; set; }
-
-        [JsonProperty(Order = -2)]
         public string warehouse { get; set; }
-
-        [JsonProperty(Order = -2)]
         public string refType { get; set; }
-
-        [JsonProperty(Order = -2)]
         public string refId { get; set; }
-
-       
-
-        public virtual message message { get; set; }
+    
+        public virtual body body { get; set; }
     }
 }

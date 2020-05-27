@@ -9,33 +9,24 @@
 
 namespace ServiciosWeb.Datos.Modelo
 {
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
-    public partial class message
+    public partial class body
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public message()
+        public body()
         {
             this.units = new HashSet<units>();
         }
-
-        [JsonProperty(Order = -3)]
+    
         public string id { get; set; }
-
-        [JsonProperty(Order = -3)]
         public string company { get; set; }
-
-        [JsonProperty(Order = -3)]
         public string tenant { get; set; }
-
-        [JsonProperty(Order = -2)]
-        public virtual ICollection<units> units { get; set; }
-
+    
+        public virtual RootObject RootObject { get; set; }
         public virtual shippingInfo shippingInfo { get; set; }
-        public virtual status_tk status_tk { get; set; }
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<units> units { get; set; }
     }
 }

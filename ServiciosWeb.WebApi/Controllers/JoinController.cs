@@ -18,13 +18,13 @@ namespace ServiciosWeb.WebApi.Controllers
         {
             using (DSE)
             {
-                var result = (from e in DSE.status_tk
-                              join d in DSE.message on e.message_id equals d.id
+                var result = (from e in DSE.RootObject
+                              join d in DSE.body on e.message_id equals d.id
                               join ws in DSE.units on e.message_id equals ws.message_id
                               join sw in DSE.shippingInfo on e.message_id equals sw.message_id
                               select new
                               {
-                                  status = e.status,
+                                  //status = e.status,
                                   id = e.message_id,
                                   company = d.company,
                                   tenant = d.tenant,

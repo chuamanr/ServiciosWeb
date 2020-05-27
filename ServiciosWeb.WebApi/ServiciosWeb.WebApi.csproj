@@ -169,15 +169,22 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Classes\AutoMapperConfig.cs" />
+    <Compile Include="Classes\WsJooycar.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JoinController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="CustomHandler\GlobalExceptionHandler.cs" />
+    <Compile Include="CustomHandler\RequestResponseHandler.cs" />
+    <Compile Include="CustomHandler\UnhandledExceptionLogger.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ApiLog.cs" />
+    <Compile Include="Models\ApiLogging.cs" />
     <Compile Include="Models\MessageDTO.cs" />
     <Compile Include="Models\ShippingInfoDTO.cs" />
+    <Compile Include="Models\SqlErrorLogging.cs" />
     <Compile Include="Models\StatusDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

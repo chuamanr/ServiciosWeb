@@ -53,6 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modelo\body.cs">
+      <DependentUpon>LibreriaBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Modelo\LibreriaBD.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -68,13 +71,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LibreriaBD.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\message.cs">
+    <Compile Include="Modelo\RootObject.cs">
       <DependentUpon>LibreriaBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelo\shippingInfo.cs">
-      <DependentUpon>LibreriaBD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Modelo\status_tk.cs">
       <DependentUpon>LibreriaBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelo\sysdiagrams.cs">

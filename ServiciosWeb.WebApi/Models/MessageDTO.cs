@@ -17,7 +17,7 @@ namespace ServiciosWeb.WebApi.Models
 
         public virtual units units { get; set; }
         public virtual shippingInfo shippingInfo { get; set; }
-        public virtual status_tk status_tk { get; set; }
+        public virtual RootObject status_tk { get; set; }
         
     }
 }

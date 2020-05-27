@@ -1,32 +1,50 @@
-﻿using ServiciosWeb.Datos.Modelo;
+﻿using Newtonsoft.Json;
+using ServiciosWeb.Datos.Modelo;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Text;
 using System.Web.Http;
+using ServiciosWeb.Datos;
 
 namespace ServiciosWeb.WebApi.Controllers
 {
     public class TicketController : ApiController
     {
-        LibreriaConnection BD = new LibreriaConnection();
+        private LibreriaConnection dbContext = new LibreriaConnection();
 
         [HttpGet]
-        public IEnumerable<status_tk> Get()
+        public IEnumerable<RootObject> Get()
         {
-            var listado = BD.status_tk.ToList();
+            var listado = dbContext.RootObject.ToList();
+            //var status_tk = JsonConvert.DeserializeObject<status_tk>(Encoding.UTF8.GetString(response));
             return listado;
         }
 
         [HttpGet]
-        public status_tk Get(string id)
+        public RootObject Get(string id)
         {
-            var status_tk = BD.status_tk.FirstOrDefault(x => x.message_id == id);
-            return status_tk;
+            var rootObject = dbContext.RootObject.FirstOrDefault(x => x.message_id == id);
+            return rootObject;
         }
 
         [HttpPost]
-        public void Post([FromBody]object value)
+
+        public IHttpActionResult AgregaTicket([FromBody] RootObject root)
         {
+            if (ModelState.IsValid)
+            {
+                dbContext.RootObject.Add(root);
+                dbContext.SaveChanges();
+                return Ok(root);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
+        
+
 
     }
 }

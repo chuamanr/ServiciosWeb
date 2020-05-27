@@ -5,13 +5,28 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="JOOYCARModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="message">
+        <EntityType Name="body">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="company" Type="varchar" MaxLength="50" />
           <Property Name="tenant" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RootObject">
+          <Key>
+            <PropertyRef Name="message_id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="message_id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="webhook_id" Type="varchar" MaxLength="100" />
+          <Property Name="transaction_id" Type="varchar" MaxLength="100" />
+          <Property Name="timestamp" Type="bigint" />
+          <Property Name="subject" Type="varchar" MaxLength="50" />
+          <Property Name="sender" Type="varchar" MaxLength="50" />
+          <Property Name="retries" Type="int" />
+          <Property Name="reference" Type="varchar" MaxLength="50" />
+          <Property Name="namespace" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="shippingInfo">
           <Key>
@@ -32,15 +47,7 @@
           <Property Name="vin" Type="varchar" MaxLength="50" />
           <Property Name="patente" Type="varchar" MaxLength="50" />
           <Property Name="poliza" Type="varchar" MaxLength="50" />
-          <Property Name="fechaEmision" Type="datetime" />
-        </EntityType>
-        <EntityType Name="status_tk">
-          <Key>
-            <PropertyRef Name="message_id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="message_id" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="status" Type="varchar" MaxLength="10" />
+          <Property Name="fechaEmision" Type="date" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -66,11 +73,23 @@
           <Property Name="refType" Type="varchar" MaxLength="10" />
           <Property Name="refId" Type="varchar" MaxLength="10" />
         </EntityType>
+        <Association Name="FK__RootObject">
+          <End Role="body" Type="Self.body" Multiplicity="1" />
+          <End Role="RootObject" Type="Self.RootObject" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="body">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RootObject">
+              <PropertyRef Name="message_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__shippingI__messa__395884C4">
-          <End Role="message" Type="Self.message" Multiplicity="1" />
+          <End Role="body" Type="Self.body" Multiplicity="1" />
           <End Role="shippingInfo" Type="Self.shippingInfo" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="message">
+            <Principal Role="body">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="shippingInfo">
@@ -78,23 +97,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__status_tk__messa__339FAB6E">
-          <End Role="message" Type="Self.message" Multiplicity="1" />
-          <End Role="status_tk" Type="Self.status_tk" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="message">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="status_tk">
-              <PropertyRef Name="message_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__units__message_i__367C1819">
-          <End Role="message" Type="Self.message" Multiplicity="1" />
+          <End Role="body" Type="Self.body" Multiplicity="1" />
           <End Role="units" Type="Self.units" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="message">
+            <Principal Role="body">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="units">
@@ -103,21 +110,21 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="JOOYCARModelStoreContainer">
-          <EntitySet Name="message" EntityType="Self.message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="body" EntityType="Self.body" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RootObject" EntityType="Self.RootObject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="shippingInfo" EntityType="Self.shippingInfo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="status_tk" EntityType="Self.status_tk" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="units" EntityType="Self.units" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__RootObject" Association="Self.FK__RootObject">
+            <End Role="body" EntitySet="body" />
+            <End Role="RootObject" EntitySet="RootObject" />
+          </AssociationSet>
           <AssociationSet Name="FK__shippingI__messa__395884C4" Association="Self.FK__shippingI__messa__395884C4">
-            <End Role="message" EntitySet="message" />
+            <End Role="body" EntitySet="body" />
             <End Role="shippingInfo" EntitySet="shippingInfo" />
           </AssociationSet>
-          <AssociationSet Name="FK__status_tk__messa__339FAB6E" Association="Self.FK__status_tk__messa__339FAB6E">
-            <End Role="message" EntitySet="message" />
-            <End Role="status_tk" EntitySet="status_tk" />
-          </AssociationSet>
           <AssociationSet Name="FK__units__message_i__367C1819" Association="Self.FK__units__message_i__367C1819">
-            <End Role="message" EntitySet="message" />
+            <End Role="body" EntitySet="body" />
             <End Role="units" EntitySet="units" />
           </AssociationSet>
         </EntityContainer>
@@ -126,16 +133,32 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="JOOYCARModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="message">
+        <EntityType Name="body">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="company" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="tenant" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="shippingInfo" Relationship="Self.FK__shippingI__messa__395884C4" FromRole="message" ToRole="shippingInfo" />
-          <NavigationProperty Name="status_tk" Relationship="Self.FK__status_tk__messa__339FAB6E" FromRole="message" ToRole="status_tk" />
-          <NavigationProperty Name="units" Relationship="Self.FK__units__message_i__367C1819" FromRole="message" ToRole="units" />
+          <NavigationProperty Name="RootObject" Relationship="Self.FK__RootObject" FromRole="body" ToRole="RootObject" />
+          <NavigationProperty Name="shippingInfo" Relationship="Self.FK__shippingI__messa__395884C4" FromRole="body" ToRole="shippingInfo" />
+          <NavigationProperty Name="units" Relationship="Self.FK__units__message_i__367C1819" FromRole="body" ToRole="units" />
+        </EntityType>
+        <EntityType Name="RootObject">
+          <Key>
+            <PropertyRef Name="message_id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="message_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="webhook_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="transaction_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="timestamp" Type="Int64" />
+          <Property Name="subject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="retries" Type="Int32" />
+          <Property Name="reference" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="namespace" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="body" Relationship="Self.FK__RootObject" FromRole="RootObject" ToRole="body" />
         </EntityType>
         <EntityType Name="shippingInfo">
           <Key>
@@ -156,17 +179,8 @@
           <Property Name="vin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="patente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="poliza" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="fechaEmision" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="message" Relationship="Self.FK__shippingI__messa__395884C4" FromRole="shippingInfo" ToRole="message" />
-        </EntityType>
-        <EntityType Name="status_tk">
-          <Key>
-            <PropertyRef Name="message_id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="message_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="message" Relationship="Self.FK__status_tk__messa__339FAB6E" FromRole="status_tk" ToRole="message" />
+          <Property Name="fechaEmision" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="body" Relationship="Self.FK__shippingI__messa__395884C4" FromRole="shippingInfo" ToRole="body" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -191,13 +205,25 @@
           <Property Name="warehouse" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="refType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="refId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="message" Relationship="Self.FK__units__message_i__367C1819" FromRole="units" ToRole="message" />
+          <NavigationProperty Name="body" Relationship="Self.FK__units__message_i__367C1819" FromRole="units" ToRole="body" />
         </EntityType>
+        <Association Name="FK__RootObject">
+          <End Role="body" Type="Self.body" Multiplicity="1" />
+          <End Role="RootObject" Type="Self.RootObject" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="body">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RootObject">
+              <PropertyRef Name="message_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__shippingI__messa__395884C4">
-          <End Role="message" Type="Self.message" Multiplicity="1" />
+          <End Role="body" Type="Self.body" Multiplicity="1" />
           <End Role="shippingInfo" Type="Self.shippingInfo" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="message">
+            <Principal Role="body">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="shippingInfo">
@@ -205,23 +231,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__status_tk__messa__339FAB6E">
-          <End Role="message" Type="Self.message" Multiplicity="1" />
-          <End Role="status_tk" Type="Self.status_tk" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="message">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="status_tk">
-              <PropertyRef Name="message_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__units__message_i__367C1819">
-          <End Role="message" Type="Self.message" Multiplicity="1" />
+          <End Role="body" Type="Self.body" Multiplicity="1" />
           <End Role="units" Type="Self.units" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="message">
+            <Principal Role="body">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="units">
@@ -230,21 +244,21 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="LibreriaConnection" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="message" EntityType="Self.message" />
+          <EntitySet Name="body" EntityType="Self.body" />
+          <EntitySet Name="RootObject" EntityType="Self.RootObject" />
           <EntitySet Name="shippingInfo" EntityType="Self.shippingInfo" />
-          <EntitySet Name="status_tk" EntityType="Self.status_tk" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="units" EntityType="Self.units" />
+          <AssociationSet Name="FK__RootObject" Association="Self.FK__RootObject">
+            <End Role="body" EntitySet="body" />
+            <End Role="RootObject" EntitySet="RootObject" />
+          </AssociationSet>
           <AssociationSet Name="FK__shippingI__messa__395884C4" Association="Self.FK__shippingI__messa__395884C4">
-            <End Role="message" EntitySet="message" />
+            <End Role="body" EntitySet="body" />
             <End Role="shippingInfo" EntitySet="shippingInfo" />
           </AssociationSet>
-          <AssociationSet Name="FK__status_tk__messa__339FAB6E" Association="Self.FK__status_tk__messa__339FAB6E">
-            <End Role="message" EntitySet="message" />
-            <End Role="status_tk" EntitySet="status_tk" />
-          </AssociationSet>
           <AssociationSet Name="FK__units__message_i__367C1819" Association="Self.FK__units__message_i__367C1819">
-            <End Role="message" EntitySet="message" />
+            <End Role="body" EntitySet="body" />
             <End Role="units" EntitySet="units" />
           </AssociationSet>
         </EntityContainer>
@@ -254,12 +268,28 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="JOOYCARModelStoreContainer" CdmEntityContainer="LibreriaConnection">
-          <EntitySetMapping Name="message">
-            <EntityTypeMapping TypeName="JOOYCARModel.message">
-              <MappingFragment StoreEntitySet="message">
+          <EntitySetMapping Name="body">
+            <EntityTypeMapping TypeName="JOOYCARModel.body">
+              <MappingFragment StoreEntitySet="body">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="company" ColumnName="company" />
                 <ScalarProperty Name="tenant" ColumnName="tenant" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RootObject">
+            <EntityTypeMapping TypeName="JOOYCARModel.RootObject">
+              <MappingFragment StoreEntitySet="RootObject">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="message_id" ColumnName="message_id" />
+                <ScalarProperty Name="webhook_id" ColumnName="webhook_id" />
+                <ScalarProperty Name="transaction_id" ColumnName="transaction_id" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
+                <ScalarProperty Name="sender" ColumnName="sender" />
+                <ScalarProperty Name="retries" ColumnName="retries" />
+                <ScalarProperty Name="reference" ColumnName="reference" />
+                <ScalarProperty Name="namespace" ColumnName="namespace" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -282,15 +312,6 @@
                 <ScalarProperty Name="patente" ColumnName="patente" />
                 <ScalarProperty Name="poliza" ColumnName="poliza" />
                 <ScalarProperty Name="fechaEmision" ColumnName="fechaEmision" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="status_tk">
-            <EntityTypeMapping TypeName="JOOYCARModel.status_tk">
-              <MappingFragment StoreEntitySet="status_tk">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="message_id" ColumnName="message_id" />
-                <ScalarProperty Name="status" ColumnName="status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

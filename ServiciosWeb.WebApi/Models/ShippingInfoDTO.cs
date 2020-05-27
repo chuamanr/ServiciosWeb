@@ -25,6 +25,6 @@ namespace ServiciosWeb.WebApi.Models
         public string poliza { get; set; }
         public Nullable<System.DateTime> fechaEmision { get; set; }
 
-        public virtual message message { get; set; }
+        public virtual body body { get; set; }
     }
 }

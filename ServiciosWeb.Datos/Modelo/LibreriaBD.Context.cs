@@ -25,9 +25,9 @@ namespace ServiciosWeb.Datos.Modelo
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<message> message { get; set; }
+        public virtual DbSet<body> body { get; set; }
+        public virtual DbSet<RootObject> RootObject { get; set; }
         public virtual DbSet<shippingInfo> shippingInfo { get; set; }
-        public virtual DbSet<status_tk> status_tk { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<units> units { get; set; }
     }

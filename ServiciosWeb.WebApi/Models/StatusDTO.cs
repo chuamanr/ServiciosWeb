@@ -12,6 +12,6 @@ namespace ServiciosWeb.WebApi.Models
     {
         public string status { get; set; }
 
-        public virtual message message { get; set; }
+        public virtual body body { get; set; }
     }
 }

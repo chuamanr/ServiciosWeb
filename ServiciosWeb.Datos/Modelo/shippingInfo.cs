@@ -20,36 +20,21 @@ namespace ServiciosWeb.Datos.Modelo
 
         [JsonIgnore]
         public string message_id { get; set; }
-
-        [JsonProperty(Order = -3)]
         public string nombres { get; set; }
-        [JsonProperty(Order = -3)]
         public string apellidoPaterno { get; set; }
-        [JsonProperty(Order = -3)]
         public string apellidoMaterno { get; set; }
-        [JsonProperty(Order = -3)]
         public string rut { get; set; }
-        [JsonProperty(Order = -3)]
         public string direccion { get; set; }
-        [JsonProperty(Order = -3)]
         public string comuna { get; set; }
-        [JsonProperty(Order = -3)]
         public string tel { get; set; }
-        [JsonProperty(Order = -3)]
         public string email { get; set; }
-        [JsonProperty(Order = -3)]
         public string marca { get; set; }
-        [JsonProperty(Order = -3)]
         public string modelo { get; set; }
-        [JsonProperty(Order = -3)]
         public string vin { get; set; }
-        [JsonProperty(Order = -3)]
         public string patente { get; set; }
-        [JsonProperty(Order = -3)]
         public string poliza { get; set; }
-        [JsonProperty(Order = -3)]
         public Nullable<System.DateTime> fechaEmision { get; set; }
     
-        public virtual message message { get; set; }
+        public virtual body body { get; set; }
     }
 }

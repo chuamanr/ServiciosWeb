@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.ExceptionHandling;
+using ServiciosWeb.WebApi.CustomHandler;
 
 namespace ServiciosWeb.WebApi
 {
@@ -13,6 +15,12 @@ namespace ServiciosWeb.WebApi
 
             // Rutas de API web
             config.MapHttpAttributeRoutes();
+
+            config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
+
+            config.Services.Replace(typeof(IExceptionLogger), new UnhandledExceptionLogger());
+
+            config.MessageHandlers.Add(new RequestResponseHandler());
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

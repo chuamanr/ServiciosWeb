@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1299606be0bf41a88f1effb6f0be2af5" Name="Diagram1">
-        <EntityTypeShape EntityType="JOOYCARModel.message" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="JOOYCARModel.shippingInfo" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="JOOYCARModel.status_tk" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+      <Diagram DiagramId="a5b82f2dac4a4849b504bd39f4820ceb" Name="Diagram1">
+        <EntityTypeShape EntityType="JOOYCARModel.body" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JOOYCARModel.RootObject" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JOOYCARModel.shippingInfo" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="JOOYCARModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="JOOYCARModel.units" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="JOOYCARModel.units" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <AssociationConnector Association="JOOYCARModel.FK__RootObject" ManuallyRouted="false" />
         <AssociationConnector Association="JOOYCARModel.FK__shippingI__messa__395884C4" ManuallyRouted="false" />
-        <AssociationConnector Association="JOOYCARModel.FK__status_tk__messa__339FAB6E" ManuallyRouted="false" />
         <AssociationConnector Association="JOOYCARModel.FK__units__message_i__367C1819" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

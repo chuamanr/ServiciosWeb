@@ -13,17 +13,40 @@ namespace ServiciosWeb.Datos.Modelo
     using System;
     using System.Collections.Generic;
     
-    public partial class status_tk
-    {   
+    public partial class RootObject
+    {
         [JsonIgnore]
         public int id { get; set; }
 
         [JsonIgnore]
         public string message_id { get; set; }
 
+        [JsonProperty(Order = 2)]
+        public string webhook_id { get; set; }
+
+        [JsonProperty(Order = 2)]
+        public string transaction_id { get; set; }
+
+        [JsonProperty(Order = 2)]
+        public long timestamp { get; set; }
+
+        [JsonProperty(Order = 2)]
+        public string subject { get; set; }
+
         [JsonProperty(Order = -2)]
-        public string status { get; set; }
-    
-        public virtual message message { get; set; }
+        public string sender { get; set; }
+
+        [JsonProperty(Order = 2)]
+        public int retries { get; set; }
+
+        [JsonProperty(Order = 2)]
+        public string reference { get; set; }
+
+        [JsonProperty(Order = 2)]
+        public string @namespace { get; set; }
+
+        [JsonProperty(Order = 2)]
+
+        public virtual body body { get; set; }
     }
 }
