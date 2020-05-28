@@ -172,7 +172,9 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ShippingUpdate.cs" />
+    <Compile Include="Controllers\ShippingCancelController.cs" />
+    <Compile Include="Controllers\PickupNewController.cs" />
+    <Compile Include="Controllers\ShippingUpdateController.cs" />
     <Compile Include="Controllers\ShippingController.cs" />
     <Compile Include="CustomHandler\GlobalExceptionHandler.cs" />
     <Compile Include="CustomHandler\RequestResponseHandler.cs" />
