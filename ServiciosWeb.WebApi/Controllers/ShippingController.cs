@@ -9,7 +9,7 @@ using ServiciosWeb.Datos;
 
 namespace ServiciosWeb.WebApi.Controllers
 {
-    public class TicketController : ApiController
+    public class ShippingController : ApiController
     {
         private LibreriaConnection dbContext = new LibreriaConnection();
 
@@ -17,7 +17,6 @@ namespace ServiciosWeb.WebApi.Controllers
         public IEnumerable<RootObject> Get()
         {
             var listado = dbContext.RootObject.ToList();
-            //var status_tk = JsonConvert.DeserializeObject<status_tk>(Encoding.UTF8.GetString(response));
             return listado;
         }
 
