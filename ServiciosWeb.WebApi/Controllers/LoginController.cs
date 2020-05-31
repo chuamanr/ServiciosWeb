@@ -14,7 +14,7 @@ using System.Web.Http;
 
 namespace ServiciosWeb.WebApi.Controllers
 {
-    public class LoginController : ApiController
+    internal class LoginController : ApiController
     {
 
         // POST: api/Login
