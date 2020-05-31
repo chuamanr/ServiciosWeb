@@ -9,6 +9,7 @@ using ServiciosWeb.Datos;
 
 namespace ServiciosWeb.WebApi.Controllers
 {
+    [Authorize]
     public class ShippingController : ApiController
     {
         private LibreriaConnection dbContext = new LibreriaConnection();
