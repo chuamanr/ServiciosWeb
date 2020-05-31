@@ -22,6 +22,8 @@ namespace ServiciosWeb.WebApi
 
             config.MessageHandlers.Add(new RequestResponseHandler());
 
+            config.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
+
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/v1/{controller}/{id}",

@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiciosWeb.Datos", "Servi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{8622A062-704F-4D36-A0D8-2799E8817717}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebJooycar", "WebJooycar\WebJooycar.csproj", "{CDE89A8C-CF13-47DB-99D7-1F4ADF62BCA5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,10 +23,6 @@ Global
 		{DDA1DB9A-EA65-4173-B818-8E9E503FC941}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDA1DB9A-EA65-4173-B818-8E9E503FC941}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDA1DB9A-EA65-4173-B818-8E9E503FC941}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CDE89A8C-CF13-47DB-99D7-1F4ADF62BCA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CDE89A8C-CF13-47DB-99D7-1F4ADF62BCA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CDE89A8C-CF13-47DB-99D7-1F4ADF62BCA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CDE89A8C-CF13-47DB-99D7-1F4ADF62BCA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
